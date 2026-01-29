@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(xcodebuild build:*)",
+      "Bash(xcodebuild test:*)",
+      "Bash(for f in DataModelTests.swift ConditionEvaluatorTests.swift ActionDispatcherTests.swift)",
+      "Bash(do head -3 \"$f\")",
+      "Bash(done)",
+      "Bash(swift build:*)",
+      "Bash(swift test:*)",
+      "WebFetch(domain:performance-partners.apple.com)",
+      "WebFetch(domain:rss.marketingtools.apple.com)"
+    ]
+  }
+}

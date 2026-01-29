@@ -1,0 +1,209 @@
+{
+  "type": "screen",
+  "props": {
+    "title": "Browse",
+    "onLoad": {
+      "actionType": "sequence",
+      "actions": [
+        {
+          "actionType": "api",
+          "endpoint": "https://rss.marketingtools.apple.com/api/v2/us/podcasts/top/50/podcasts.json",
+          "resultKey": "topPodcasts"
+        },
+        {
+          "actionType": "api",
+          "endpoint": "https://rss.marketingtools.apple.com/api/v2/us/podcasts/top-subscriber/50/podcasts.json",
+          "resultKey": "topSubscriber"
+        },
+        {
+          "actionType": "api",
+          "endpoint": "https://rss.marketingtools.apple.com/api/v2/us/podcasts/top/10/podcast-episodes.json",
+          "resultKey": "topEpisodes"
+        }
+      ]
+    }
+  },
+  "children": [
+    {
+      "type": "scroll",
+      "props": { "axis": "horizontal" },
+      "children": [
+        {
+          "type": "hstack",
+          "props": { "spacing": 16, "alignment": "top" },
+          "inlineStyle": { "padding": 16 },
+          "children": [
+            {
+              "type": "vstack",
+              "props": { "spacing": 0, "alignment": "leading" },
+              "inlineStyle": {
+                "width": 350,
+                "backgroundColor": "surface",
+                "cornerRadius": 16
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "props": { "content": "Top Podcasts" },
+                  "inlineStyle": { "font": "title", "foregroundColor": "text_primary", "padding": { "top": 16, "bottom": 8, "leading": 16, "trailing": 16 } }
+                },
+                {
+                  "type": "scroll",
+                  "props": { "axis": "vertical" },
+                  "children": [
+                    {
+                      "type": "lazy_vstack",
+                      "props": { "spacing": 0, "alignment": "leading" },
+                      "children": [
+                        {
+                          "type": "list",
+                          "props": {
+                            "items": "$.topPodcasts",
+                            "itemTemplate": {
+                              "type": "button",
+                              "props": {
+                                "action": {
+                                  "actionType": "navigate",
+                                  "screen": "podcast_detail",
+                                  "params": {
+                                    "podcastId": "$.item.id",
+                                    "podcastName": "$.item.name",
+                                    "podcastArtist": "$.item.artistName",
+                                    "podcastArtwork": "$.item.artworkUrl100"
+                                  }
+                                },
+                                "label": {
+                                  "type": "component",
+                                  "props": {
+                                    "name": "podcast_card",
+                                    "parameters": { "podcast": "$.item" }
+                                  }
+                                }
+                              },
+                              "inlineStyle": { "padding": { "top": 6, "bottom": 6, "leading": 16, "trailing": 16 } }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vstack",
+              "props": { "spacing": 0, "alignment": "leading" },
+              "inlineStyle": {
+                "width": 350,
+                "backgroundColor": "surface",
+                "cornerRadius": 16
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "props": { "content": "Top Subscriber" },
+                  "inlineStyle": { "font": "title", "foregroundColor": "text_primary", "padding": { "top": 16, "bottom": 8, "leading": 16, "trailing": 16 } }
+                },
+                {
+                  "type": "scroll",
+                  "props": { "axis": "vertical" },
+                  "children": [
+                    {
+                      "type": "lazy_vstack",
+                      "props": { "spacing": 0, "alignment": "leading" },
+                      "children": [
+                        {
+                          "type": "list",
+                          "props": {
+                            "items": "$.topSubscriber",
+                            "itemTemplate": {
+                              "type": "button",
+                              "props": {
+                                "action": {
+                                  "actionType": "navigate",
+                                  "screen": "podcast_detail",
+                                  "params": {
+                                    "podcastId": "$.item.id",
+                                    "podcastName": "$.item.name",
+                                    "podcastArtist": "$.item.artistName",
+                                    "podcastArtwork": "$.item.artworkUrl100"
+                                  }
+                                },
+                                "label": {
+                                  "type": "component",
+                                  "props": {
+                                    "name": "podcast_card",
+                                    "parameters": { "podcast": "$.item" }
+                                  }
+                                }
+                              },
+                              "inlineStyle": { "padding": { "top": 6, "bottom": 6, "leading": 16, "trailing": 16 } }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vstack",
+              "props": { "spacing": 0, "alignment": "leading" },
+              "inlineStyle": {
+                "width": 350,
+                "backgroundColor": "surface",
+                "cornerRadius": 16
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "props": { "content": "Top Episodes" },
+                  "inlineStyle": { "font": "title", "foregroundColor": "text_primary", "padding": { "top": 16, "bottom": 8, "leading": 16, "trailing": 16 } }
+                },
+                {
+                  "type": "scroll",
+                  "props": { "axis": "vertical" },
+                  "children": [
+                    {
+                      "type": "lazy_vstack",
+                      "props": { "spacing": 0, "alignment": "leading" },
+                      "children": [
+                        {
+                          "type": "list",
+                          "props": {
+                            "items": "$.topEpisodes",
+                            "itemTemplate": {
+                              "type": "button",
+                              "props": {
+                                "action": {
+                                  "actionType": "navigate",
+                                  "screen": "episode_detail",
+                                  "params": {
+                                    "episode": "$.item"
+                                  }
+                                },
+                                "label": {
+                                  "type": "component",
+                                  "props": {
+                                    "name": "episode_row",
+                                    "parameters": { "episode": "$.item" }
+                                  }
+                                }
+                              },
+                              "inlineStyle": { "padding": { "top": 6, "bottom": 6, "leading": 16, "trailing": 16 } }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

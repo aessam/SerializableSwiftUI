@@ -1,0 +1,64 @@
+{
+  "colors": {
+    "primary": "#007AFF",
+    "secondary": "#8E8E93",
+    "destructive": "#FF3B30",
+    "background": {
+      "light": "#FFFFFF",
+      "dark": "#1C1C1E"
+    },
+    "surface": {
+      "light": "#F2F2F7",
+      "dark": "#2C2C2E"
+    },
+    "text_primary": {
+      "light": "#000000",
+      "dark": "#FFFFFF"
+    },
+    "text_secondary": {
+      "light": "#6C6C70",
+      "dark": "#ABABAF"
+    }
+  },
+  "fonts": {
+    "largeTitle": { "size": 34, "weight": "bold", "design": "default" },
+    "title": { "size": 20, "weight": "semibold" },
+    "body": { "size": 17, "weight": "regular" },
+    "caption": { "size": 13, "weight": "regular" },
+    "footnote": { "size": 12, "weight": "regular" }
+  },
+  "presets": {
+    "title": {
+      "font": "title",
+      "foregroundColor": "text_primary"
+    },
+    "subtitle": {
+      "font": "caption",
+      "foregroundColor": "text_secondary"
+    },
+    "body_text": {
+      "font": "body",
+      "foregroundColor": "text_primary"
+    },
+    "artwork_thumbnail": {
+      "width": 60,
+      "height": 60,
+      "cornerRadius": 8
+    },
+    "artwork_large": {
+      "width": 200,
+      "height": 200,
+      "cornerRadius": 12,
+      "shadow": { "radius": 4, "y": 2, "color": "#00000033" }
+    },
+    "card": {
+      "padding": 12,
+      "backgroundColor": "surface",
+      "cornerRadius": 10
+    },
+    "screen_body": {
+      "padding": 16,
+      "backgroundColor": "background"
+    }
+  }
+}

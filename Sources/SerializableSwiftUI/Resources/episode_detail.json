@@ -1,0 +1,66 @@
+{
+  "type": "screen",
+  "props": {
+    "title": "$.episode.name"
+  },
+  "children": [
+    {
+      "type": "scroll",
+      "props": { "axis": "vertical" },
+      "children": [
+        {
+          "type": "vstack",
+          "props": { "spacing": 16, "alignment": "leading" },
+          "inlineStyle": { "padding": 16 },
+          "children": [
+            {
+              "type": "image",
+              "props": {
+                "source": "$.episode.artworkUrl100",
+                "contentMode": "fit"
+              },
+              "style": "artwork_large",
+              "condition": "$.episode.artworkUrl100 | exists"
+            },
+            {
+              "type": "text",
+              "props": { "content": "$.episode.name" },
+              "inlineStyle": { "font": "largeTitle", "foregroundColor": "text_primary" }
+            },
+            {
+              "type": "text",
+              "props": { "content": "$.episode.artistName" },
+              "style": "subtitle",
+              "condition": "$.episode.artistName | exists"
+            },
+            {
+              "type": "hstack",
+              "props": { "spacing": 12 },
+              "children": [
+                {
+                  "type": "text",
+                  "props": { "content": "$.episode.releaseDate | date:MMM d, yyyy" },
+                  "style": "subtitle",
+                  "condition": "$.episode.releaseDate | exists"
+                },
+                {
+                  "type": "text",
+                  "props": { "content": "$.episode.trackTimeMillis | duration:mm:ss" },
+                  "style": "subtitle",
+                  "condition": "$.episode.trackTimeMillis | exists"
+                }
+              ]
+            },
+            { "type": "divider" },
+            {
+              "type": "text",
+              "props": { "content": "$.episode.description" },
+              "style": "body_text",
+              "condition": "$.episode.description | exists"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

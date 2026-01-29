@@ -1,0 +1,56 @@
+{
+  "components": {
+    "podcast_card": {
+      "parameters": ["podcast"],
+      "body": {
+        "type": "hstack",
+        "props": { "spacing": 12 },
+        "children": [
+          {
+            "type": "image",
+            "props": {
+              "source": "$.podcast.artworkUrl100",
+              "contentMode": "fill"
+            },
+            "style": "artwork_thumbnail"
+          },
+          {
+            "type": "vstack",
+            "props": { "alignment": "leading", "spacing": 4 },
+            "children": [
+              { "type": "text", "props": { "content": "$.podcast.name" }, "style": "title" },
+              { "type": "text", "props": { "content": "$.podcast.artistName" }, "style": "subtitle" }
+            ]
+          },
+          { "type": "spacer" }
+        ]
+      }
+    },
+    "episode_row": {
+      "parameters": ["episode"],
+      "body": {
+        "type": "hstack",
+        "props": { "spacing": 12 },
+        "children": [
+          {
+            "type": "image",
+            "props": {
+              "source": "$.episode.artworkUrl100",
+              "contentMode": "fill"
+            },
+            "style": "artwork_thumbnail"
+          },
+          {
+            "type": "vstack",
+            "props": { "alignment": "leading", "spacing": 4 },
+            "children": [
+              { "type": "text", "props": { "content": "$.episode.name" }, "style": "title" },
+              { "type": "text", "props": { "content": "$.episode.artistName" }, "style": "subtitle" }
+            ]
+          },
+          { "type": "spacer" }
+        ]
+      }
+    }
+  }
+}

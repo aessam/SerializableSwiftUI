@@ -1,0 +1,90 @@
+{
+  "type": "screen",
+  "props": {
+    "title": "$.podcastName",
+    "onLoad": {
+      "actionType": "api",
+      "endpoint": "/lookup",
+      "params": { "id": "$.podcastId", "entity": "podcastEpisode" },
+      "resultKey": "episodes"
+    }
+  },
+  "children": [
+    {
+      "type": "scroll",
+      "props": { "axis": "vertical" },
+      "children": [
+        {
+          "type": "vstack",
+          "props": { "spacing": 16, "alignment": "center" },
+          "inlineStyle": { "padding": 16 },
+          "children": [
+            {
+              "type": "image",
+              "props": {
+                "source": "$.podcastArtwork",
+                "contentMode": "fit"
+              },
+              "style": "artwork_large"
+            },
+            {
+              "type": "text",
+              "props": { "content": "$.podcastName" },
+              "inlineStyle": { "font": "largeTitle", "foregroundColor": "text_primary" }
+            },
+            {
+              "type": "text",
+              "props": { "content": "$.podcastArtist" },
+              "inlineStyle": { "font": "title", "foregroundColor": "text_secondary" }
+            },
+            { "type": "divider" },
+            {
+              "type": "hstack",
+              "props": { "spacing": 0 },
+              "children": [
+                {
+                  "type": "text",
+                  "props": { "content": "Episodes" },
+                  "inlineStyle": { "font": "title", "foregroundColor": "text_primary" }
+                },
+                { "type": "spacer" }
+              ]
+            },
+            {
+              "type": "lazy_vstack",
+              "props": { "spacing": 0, "alignment": "leading" },
+              "children": [
+                {
+                  "type": "list",
+                  "props": {
+                    "items": "$.episodes",
+                    "itemTemplate": {
+                      "type": "button",
+                      "props": {
+                        "action": {
+                          "actionType": "navigate",
+                          "screen": "episode_detail",
+                          "params": {
+                            "episode": "$.item"
+                          }
+                        },
+                        "label": {
+                          "type": "component",
+                          "props": {
+                            "name": "episode_row",
+                            "parameters": { "episode": "$.item" }
+                          }
+                        }
+                      },
+                      "inlineStyle": { "padding": { "top": 8, "bottom": 8, "leading": 0, "trailing": 0 } }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

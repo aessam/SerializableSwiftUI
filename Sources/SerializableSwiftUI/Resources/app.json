@@ -1,0 +1,17 @@
+{
+  "type": "tab_view",
+  "props": {
+    "tabs": [
+      {
+        "title": "Browse",
+        "icon": "square.grid.2x2",
+        "screen": "browse"
+      },
+      {
+        "title": "Search",
+        "icon": "magnifyingglass",
+        "screen": "search"
+      }
+    ]
+  }
+}

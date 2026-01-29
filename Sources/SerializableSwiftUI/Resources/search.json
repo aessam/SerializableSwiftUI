@@ -1,0 +1,68 @@
+{
+  "type": "screen",
+  "props": {
+    "title": "Search"
+  },
+  "children": [
+    {
+      "type": "vstack",
+      "props": { "spacing": 0 },
+      "children": [
+        {
+          "type": "search_bar",
+          "props": {
+            "placeholder": "Search podcasts...",
+            "binding": "$.env.searchQuery",
+            "onSubmit": {
+              "actionType": "api",
+              "endpoint": "/search",
+              "params": { "term": "$.env.searchQuery", "media": "podcast" },
+              "resultKey": "searchResults"
+            }
+          }
+        },
+        {
+          "type": "scroll",
+          "props": { "axis": "vertical" },
+          "children": [
+            {
+              "type": "lazy_vstack",
+              "props": { "spacing": 0 },
+              "children": [
+                {
+                  "type": "list",
+                  "props": {
+                    "items": "$.searchResults",
+                    "itemTemplate": {
+                      "type": "button",
+                      "props": {
+                        "action": {
+                          "actionType": "navigate",
+                          "screen": "podcast_detail",
+                          "params": {
+                            "podcastId": "$.item.id",
+                            "podcastName": "$.item.name",
+                            "podcastArtist": "$.item.artistName",
+                            "podcastArtwork": "$.item.artworkUrl100"
+                          }
+                        },
+                        "label": {
+                          "type": "component",
+                          "props": {
+                            "name": "podcast_card",
+                            "parameters": { "podcast": "$.item" }
+                          }
+                        }
+                      },
+                      "inlineStyle": { "padding": { "top": 8, "bottom": 8, "leading": 0, "trailing": 0 } }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
