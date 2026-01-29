@@ -2,6 +2,7 @@ import SwiftUI
 import ViewEngine
 import ActionSystem
 import PodcastData
+import EditorUI
 import os
 
 private let logger = Logger(subsystem: "SerializableSwiftUI", category: "App")
@@ -13,6 +14,8 @@ func appLog(_ msg: String) {
 
 @main
 struct SerializableSwiftUIApp: App {
+    @State private var editorMode = false
+
     init() {
         #if os(macOS)
         NSApplication.shared.setActivationPolicy(.regular)
@@ -25,8 +28,34 @@ struct SerializableSwiftUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            if editorMode {
+                editorView
+            } else {
+                RootView()
+            }
         }
+        .commands {
+            CommandMenu("Editor") {
+                Toggle("Editor Mode", isOn: $editorMode)
+                    .keyboardShortcut("e", modifiers: [.command, .shift])
+            }
+        }
+    }
+
+    private var editorView: some View {
+        let resourcesURL = Bundle.module.bundleURL
+            .appendingPathComponent("Contents")
+            .appendingPathComponent("Resources")
+        let projectURL: URL = {
+            // Try the processed resources path; fall back to bundle URL
+            if FileManager.default.fileExists(atPath: resourcesURL.path) {
+                return resourcesURL
+            }
+            return Bundle.module.bundleURL
+        }()
+        let manager = ProjectManager(projectURL: projectURL)
+        let document = manager.loadDocument()
+        return EditorRootView(document: document)
     }
 }
 
